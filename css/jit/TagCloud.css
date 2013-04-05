@@ -1,0 +1,56 @@
+/* 
+    Document   : TagCloud
+    Created on : Nov 2, 2012, 1:04:07 PM
+    Author     : jcabrera
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#tagcloud {
+    width: 300px;
+    background:#CFE3FF;
+    color:#0066FF;
+    padding: 10px;
+    border: 1px solid #559DFF;
+    text-align:center;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+ 
+#tagcloud a:link, #tagcloud a:visited {
+    text-decoration:none;
+    color: #333;
+}
+ 
+#tagcloud a:hover {
+    text-decoration: underline;
+}
+ 
+#tagcloud span {
+    padding: 4px;
+}
+ 
+#tagcloud .smallest {
+    font-size:  x-small;
+}
+ 
+#tagcloud .small {
+    font-size: small;
+}
+ 
+#tagcloud .medium {
+    font-size: large;
+}
+ 
+#tagcloud .large {
+    font-size:  larger;
+}
+ 
+#tagcloud .largest {
+    font-size: x-large;
+}

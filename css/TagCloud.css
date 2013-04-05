@@ -1,0 +1,48 @@
+
+#tagcloud {
+    width: 300px;
+    background:#CFE3FF;
+    color:#0066FF;
+    padding: 1px;
+    border: 1px solid #559DFF;
+    text-align:center;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    clear: right;
+}
+ 
+#tagcloud a:link, #tagcloud a:visited,#tagcloud a{
+    text-decoration:none;
+    color: #333;
+    background-color: transparent;
+    text-decoration:none;
+}
+ 
+#tagcloud a:hover {
+    text-decoration: underline;
+}
+ 
+#tagcloud span {
+    padding: 4px;
+}
+ 
+#tagcloud .smallest {
+    font-size:  x-small;
+}
+ 
+#tagcloud .small {
+    font-size: small;
+}
+ 
+#tagcloud .medium {
+    font-size: large;
+}
+ 
+#tagcloud .large {
+    font-size:  larger;
+}
+ 
+#tagcloud .largest {
+    font-size: x-large;
+}
