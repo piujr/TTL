@@ -76,7 +76,7 @@
         
         <form >
             <label for="author">Nombre Investigador: </label>
-            <input id="author" name="author" size="50"/>
+            <input id="author" name="author" size="20"/>
             <input type="hidden"id="idAuthor" name="idAuthor"/>
             <input type="button" id="buscar"name="buscar" value="buscar">
         </form>

@@ -7,9 +7,12 @@ class graficasKeys extends CI_Controller {
      }
     function index(){
         
-        $this->db->select("idKeyword, Name",false);
-        $this->db->where(array('baja' => 0));                 
-        $query = $this->db->get('Keyword'); 
+        $query= $this->db->query("Select Name, idKeyword from Keyword 
+            INNER JOIN Publication_has_Keyword ON
+            (Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword) 
+            WHERE Keyword.baja= 0
+            GROUP BY Name, idKeyword 
+                ");            
         $rows=$query->result();
         //print_r($_POST['keys']);
         

@@ -16,7 +16,7 @@ class Authors extends CI_Controller {
         
         
         $this->db->select("IDAuthor as id, CONCAT(FirstName,' ', IF (MiddleName IS NULL ,'',MiddleName),' ', IF (LastName IS NULL, '', LastName) ) as value",false);
-        $this->db->where(array('Extras' => 0)); 
+        $this->db->where('Extras' , 0); 
         $this->db->like("CONCAT_WS(Author.FirstName,' ', MiddleName,' ',LastName )",$nombreA,'both'); 
         $this->db->limit(10);
         $query = $this->db->get('Author'); 
@@ -72,14 +72,16 @@ class Authors extends CI_Controller {
             endforeach;
             $data['nombreAuthor']=$authoresKeywords[0]->FirstName. " " .$authoresKeywords[0]->MiddleName. " ". $authoresKeywords[0]->LastName;
         $data['keys']=$keys;
+      
         $data['totalKeyWords']=$totalKeyWords;
         
         $data['maximun']= $maximum;
         $data['minimum']= $minimum;
         $data['min_size']= 5;
         $data['max_size']= 35;
-        $data['spread']= $maximum - $minimum;
-        $data['title']='CloudTag';        
+        $data['spread']= ($maximum - $minimum) +.001;
+        $data['title']='CloudTag';  
+        //print_r($data);  
         //$data['mainContent']='cloudAuthor';
         $this->load->view('cloudAuthor',$data);
 

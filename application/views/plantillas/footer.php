@@ -10,8 +10,8 @@
 <!-- ####################################################################################################### -->
 <div id="copyright">
   <div class="wrapper">
-    <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <p class="fl_left">Los datos fueron obtenidos el 21/02/2013</p>
+    <p class="fl_right">INAOE</p>
     <br class="clear" />
   </div>
 </div>

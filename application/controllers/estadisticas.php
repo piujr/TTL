@@ -259,71 +259,71 @@ ORDER BY
             
         case 1:
            $queryString=  sprintf("  SELECT DISTINCT                     
-                    count(distinct MAS.Publication.idPublication) AS publicaciones,
-                    MAS.Journal.FullName,
-                    MAS.Journal.FullName,  
-                    GROUP_CONCAT(  DISTINCT MAS.Publication.Title SEPARATOR '; ') as PublicNames,
-                     GROUP_CONCAT( DISTINCT IFNULL(MAS.Author.`FirstName`,''),' ',  IFNULL(MAS.Author.`MiddleName`,''),' ', IFNULL(MAS.Author.`LastName`,'') SEPARATOR '; ') as authors
+                    count(distinct Publication.idPublication) AS publicaciones,
+                    Journal.FullName,
+                    Journal.FullName,  
+                    GROUP_CONCAT(  DISTINCT Publication.Title SEPARATOR '; ') as PublicNames,
+                     GROUP_CONCAT( DISTINCT IFNULL(Author.`FirstName`,''),' ',  IFNULL(Author.`MiddleName`,''),' ', IFNULL(Author.`LastName`,'') SEPARATOR '; ') as authors
                      
                   FROM
-                    MAS.Organization
-                    INNER JOIN MAS.Author ON (MAS.Organization.idOrganization = MAS.Author.Organization_idOrganization)
-                    INNER JOIN MAS.Author_has_Publication ON (MAS.Author.IDAuthor = MAS.Author_has_Publication.Author_IDAuthor)
-                    INNER JOIN MAS.Publication ON (MAS.Publication.idPublication = MAS.Author_has_Publication.Publication_idPublication)
-                    INNER JOIN MAS.Journal ON (MAS.Journal.idJournal = MAS.Publication.Journal_idJournal)
+                    Organization
+                    INNER JOIN Author ON (Organization.idOrganization = Author.Organization_idOrganization)
+                    INNER JOIN Author_has_Publication ON (Author.IDAuthor = Author_has_Publication.Author_IDAuthor)
+                    INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
+                    INNER JOIN Journal ON (Journal.idJournal = Publication.Journal_idJournal)
                   WHERE
-                  MAS.Author.`Extras`=0 and
-                    MAS.Organization.idOrganization = %d AND 
-                    MAS.Publication.Journal_idJournal > 0
+                  Author.Extras=0 and
+                    Organization.idOrganization = %d AND 
+                    Publication.Journal_idJournal > 0
                   GROUP BY
-                    MAS.Journal.FullName
+                    Journal.FullName
                   ORDER BY
-                    MAS.Journal.FullName  ",$id);
+                    Journal.FullName  ",$id);
             break;
         case 2:
         $queryString=  sprintf("SELECT DISTINCT 
-                    count(distinct MAS.Publication.idPublication) AS publicaciones,
-                    MAS.Conference.FullName,
-                    GROUP_CONCAT(DISTINCT MAS.Publication.Title SEPARATOR '; ') AS PublicNames,
-                    GROUP_CONCAT(DISTINCT IFNULL(MAS.Author.FirstName, ''), ' ', IFNULL(MAS.Author.MiddleName, ''), ' ', IFNULL(MAS.Author.LastName, '') SEPARATOR '; ') AS authors,
-                    MAS.Conference.FullName
+                    count(distinct Publication.idPublication) AS publicaciones,
+                    Conference.FullName,
+                    GROUP_CONCAT(DISTINCT Publication.Title SEPARATOR '; ') AS PublicNames,
+                    GROUP_CONCAT(DISTINCT IFNULL(Author.FirstName, ''), ' ', IFNULL(Author.MiddleName, ''), ' ', IFNULL(Author.LastName, '') SEPARATOR '; ') AS authors,
+                    Conference.FullName
                   FROM
-                    MAS.Organization
-                    INNER JOIN MAS.Author ON (MAS.Organization.idOrganization = MAS.Author.Organization_idOrganization)
-                    INNER JOIN MAS.Author_has_Publication ON (MAS.Author.IDAuthor = MAS.Author_has_Publication.Author_IDAuthor)
-                    INNER JOIN MAS.Publication ON (MAS.Publication.idPublication = MAS.Author_has_Publication.Publication_idPublication)
-                    INNER JOIN MAS.Conference ON (MAS.Publication.Conference_idConference = MAS.Conference.idConference)
+                    Organization
+                    INNER JOIN Author ON (Organization.idOrganization = Author.Organization_idOrganization)
+                    INNER JOIN Author_has_Publication ON (Author.IDAuthor = Author_has_Publication.Author_IDAuthor)
+                    INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
+                    INNER JOIN Conference ON (Publication.Conference_idConference = Conference.idConference)
                   WHERE
-                    MAS.Author.Extras = 0 AND 
-                    MAS.Organization.idOrganization = %d AND 
-                    MAS.Publication.Conference_idConference > 0
+                    Author.Extras = 0 AND 
+                    Organization.idOrganization = %d AND 
+                    Publication.Conference_idConference > 0
                   GROUP BY
-                    MAS.Conference.FullName
+                    Conference.FullName
                   ORDER BY
-                    MAS.Conference.FullName
+                    Conference.FullName
                ",$id); 
             break;
         case 3:
             $queryString=  sprintf("SELECT DISTINCT 
-                    count(distinct MAS.Publication.idPublication) AS publicaciones,
-                    MAS.Conference.FullName,
-                    GROUP_CONCAT(DISTINCT MAS.Publication.Title SEPARATOR '; ') AS PublicNames,
-                    GROUP_CONCAT(DISTINCT IFNULL(MAS.Author.FirstName, ''), ' ', IFNULL(MAS.Author.MiddleName, ''), ' ', IFNULL(MAS.Author.LastName, '') SEPARATOR '; ') AS authors,
-                    MAS.Conference.FullName
+                    count(distinct Publication.idPublication) AS publicaciones,
+                    Conference.FullName,
+                    GROUP_CONCAT(DISTINCT Publication.Title SEPARATOR '; ') AS PublicNames,
+                    GROUP_CONCAT(DISTINCT IFNULL(Author.FirstName, ''), ' ', IFNULL(Author.MiddleName, ''), ' ', IFNULL(Author.LastName, '') SEPARATOR '; ') AS authors,
+                    Conference.FullName
                   FROM
-                    MAS.Organization
-                    INNER JOIN MAS.Author ON (MAS.Organization.idOrganization = MAS.Author.Organization_idOrganization)
-                    INNER JOIN MAS.Author_has_Publication ON (MAS.Author.IDAuthor = MAS.Author_has_Publication.Author_IDAuthor)
-                    INNER JOIN MAS.Publication ON (MAS.Publication.idPublication = MAS.Author_has_Publication.Publication_idPublication)
-                    INNER JOIN MAS.Conference ON (MAS.Publication.Conference_idConference = MAS.Conference.idConference)
+                    Organization
+                    INNER JOIN Author ON (Organization.idOrganization = Author.Organization_idOrganization)
+                    INNER JOIN Author_has_Publication ON (Author.IDAuthor = Author_has_Publication.Author_IDAuthor)
+                    INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
+                    INNER JOIN Conference ON (Publication.Conference_idConference = Conference.idConference)
                   WHERE
-                    MAS.Author.Extras = 0 AND 
-                    MAS.Organization.idOrganization = %d AND 
-                      MAS.Publication.Conference_idConference = 0  and MAS.Publication.`Journal_idJournal` = 0
+                    Author.Extras = 0 AND 
+                    Organization.idOrganization = %d AND 
+                      Publication.Conference_idConference = 0  and Publication.`Journal_idJournal` = 0
                   GROUP BY
-                    MAS.Conference.FullName
+                    Conference.FullName
                   ORDER BY
-                    MAS.Conference.FullName
+                    Conference.FullName
                ",$id); 
             break;
         }
@@ -504,14 +504,16 @@ ORDER BY
             INNER JOIN Author ON (Author_has_Publication.Author_IDAuthor = Author.IDAuthor)
           WHERE
             Author.Extras = 0 AND 
-            Keyword.baja = 0
-            AND Keyword.baja = 0 
+            Keyword.baja = 0            
           GROUP BY
             Keyword.Name
-          HAVING
-            nautores > 4
+          
           ORDER BY
            nautores Desc";
+        /*
+         * HAVING
+            nautores > 4
+         */
          $query= $this->db->query($queryString);
          //$resultados=$query->result();
         $this->load->library('table');
