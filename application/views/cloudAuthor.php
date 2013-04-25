@@ -10,10 +10,10 @@ asort($keys);
         $frecuencia= $v->Frequencia;
         $key=$v->Name;
        $idKey=$v->idKeyword;       
-        $size = $min_size*2 + ($frecuencia - $minimum)* ($max_size - $min_size) / $spread;
+        $size = ($min_size*2 + ($frecuencia - $minimum)* ($max_size - $min_size) / $spread) ;
        ?>
        <span >
-         <a href="search.php?search=<?php echo $idKey; ?>" style="font-size:<?=floor($size)?>px" ><?php echo $key; ?></a>
+         <span style="font-size:<?=floor($size)?>px" ><?php echo $key; ?></a>
        </span>
     <?php  endforeach; ?>
 </div>

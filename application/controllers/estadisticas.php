@@ -327,8 +327,9 @@ ORDER BY
                ",$id); 
             break;
         }
-         $query= $this->db->query($queryString);
-         $resultados=$query->result();
+        
+        
+         $query= $this->db->query($queryString);         
         $this->load->library('table');
         $this->table->set_heading('#', 'Nombre', 'Titulos Pubs.', 'Autores');
         $tmpl = array (

@@ -12,6 +12,7 @@ class Graph extends CI_Controller {
                                 Author.FirstName,
                                 Author.LastName,
                                 Author.MiddleName,
+                                Author.DisplayPhotoURL,
                                 GROUP_CONCAT(DISTINCT idKeyword SEPARATOR ' ,')as GroupKeys,
                                  GROUP_CONCAT(DISTINCT Keyword.name SEPARATOR ' ,') as GroupKeysName
                                 FROM
@@ -48,7 +49,7 @@ class Graph extends CI_Controller {
                     
                     
             $queryString=sprintf("SELECT
-                            Author.IDAuthor, count(DISTINCT idKeyword) as totalKeys
+                            Author.IDAuthor,  count(DISTINCT idKeyword) as totalKeys
                             FROM
                               Author_has_Publication
                             INNER JOIN Author
@@ -71,6 +72,7 @@ class Graph extends CI_Controller {
             $query2=$this->db->query($queryString);
             $json[$contador]['id']=$v->IDAuthor;
             $json[$contador]['name']=$v->FirstName." ".$v->MiddleName." ".$v->LastName;
+            $json[$contador]['data']['foto']=$v->DisplayPhotoURL;
             $json[$contador]['data']['color']='#DF013A';
             $json[$contador]['data']['$type']='circle';
             $json[$contador]['data']['$dim']='10';

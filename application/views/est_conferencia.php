@@ -8,7 +8,7 @@
             modal: true,
             resizable: false,
             height:400,
-            width: 800,
+            width: 950,
             buttons: {
                 Ok: function() {
                     $( this ).dialog( "close" );
