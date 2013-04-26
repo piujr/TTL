@@ -4,7 +4,9 @@ class Authors extends CI_Controller {
     
     public function __construct() {
             parent::__construct();
+            $this->load->database();
             $this->load->helper('url'); 
+            $this->load->library('grocery_CRUD');
      }
      
      private function AddInvestigador($idM){
@@ -233,11 +235,19 @@ class Authors extends CI_Controller {
         return $return;
         
      }
-     
+     function CRUD(){         
+        $this->grocery_crud->set_table('Author');
+        $output = $this->grocery_crud->render();
+        $this->_example_output($output);
+     }
+     function _example_output($output = null){
+        $this->load->view('example',$output);
+     } 
      function add(){         
         $this->debug=false;
         $data['mainContent']='addInve';       
         $data['title']='Titulo';        
+        $data['res']=''; 
         if ( isset($_POST['IDM'])){
             $res=$this->AddInvestigador(intval($_POST['IDM']));
             $data['res']=$res;
