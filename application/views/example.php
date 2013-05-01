@@ -28,12 +28,16 @@ a:hover
 </head>
 <body>
 	<div>
-		<a href='<?php echo site_url('examples/customers_management')?>'>Customers</a> |
-		<a href='<?php echo site_url('examples/orders_management')?>'>Orders</a> |
-		<a href='<?php echo site_url('examples/products_management')?>'>Products</a> |
-		<a href='<?php echo site_url('examples/offices_management')?>'>Offices</a> | 
-		<a href='<?php echo site_url('examples/employees_management')?>'>Employees</a> |		 
-		<a href='<?php echo site_url('examples/film_management')?>'>Films</a>
+            
+            <?
+           $metodos=(get_class_methods("Management"));
+           foreach ($metodos as $m ):               
+               $pos= strpos($m, 'TTL') ;
+               if ($pos !== FALSE){                   
+                    ?>
+                    <a href='<?php echo site_url('Management/'. $m)?>'><?=substr($m, 4)?></a> |
+                <?}
+          endforeach;?>		
 	</div>
 	<div style='height:20px;'></div>  
     <div>

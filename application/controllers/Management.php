@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 /**
  * Description of Movimientos
  *
@@ -14,7 +16,7 @@ class Management extends CI_Controller {
      public function index(){
          
      }
-    public function keys(){
+    public function TTL_Keys(){
         $crud = new grocery_CRUD();
 
         $crud->set_table('Keyword');
@@ -28,7 +30,7 @@ class Management extends CI_Controller {
 
         $this->output($output);
     }
-    public function keysPub(){
+    public function TTL_KeysPub(){
         $crud = new grocery_CRUD();
 
         $crud->set_table('Publication_has_Keyword');
@@ -45,10 +47,10 @@ class Management extends CI_Controller {
 
         $this->output($output);
     }
-    public function authorPublication(){
+    /*public function authorPublication(){
         $crud = new grocery_CRUD();
         $crud->set_table('Author_has_Publication');
-        $crud->columns('Author_IDAuthor','Publication_idPublication');
+            $crud->columns('Author_IDAuthor','Publication_idPublication');
         $crud->display_as('Author_IDAuthor','Author')
              ->display_as('Publication_idPublication','Publicacion');
         $crud->set_subject('Autores y sus publicaciones');
@@ -57,37 +59,77 @@ class Management extends CI_Controller {
         $output = $crud->render();
         $this->output($output);
     }
-    public function authorPublicationN(){
+     * 
+     */
+    public function TTL_authorPublication(){
         $crud = new grocery_CRUD();
-        
-        $crud->set_table('Author_has_Publication');
-        $crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
-        $crud->set_relation_n_n('category', 'film_category', 'category', 'film_id', 'category_id', 'name');
-
-        $crud->unset_columns('description','special_features','last_update');
-        $crud->fields('title', 'description', 'actors' ,  'category' ,'release_year', 'rental_duration', 'rental_rate', 'length', 'replacement_cost', 'rating', 'special_features');
- 
-        
+        $crud->set_table('Author');
+        $crud->set_relation_n_n('Publicaciones', 'Author_has_Publication', 'Publication', 'Author_IDAuthor', 'Publication_idPublication', 'Title');        
+        $crud->set_relation('Organization_idOrganization', 'Organization','Name');
+        $crud->unset_columns('DOI','URL','YEAR','PublicationCount','CitationCount','citationCount','HIndex','GIndex','DisplayPhotoURL');
+        $crud->fields('FirstName', 'LastName', 'MiddleName', 'NativeName','Extras','DisplayPhotoURL','Publicaciones','Organization_idOrganization' );
+        $crud->display_as('Extras','Desactivado');
         $output = $crud->render();
         $this->output($output);
     }
-    
-
-
     function output($output = null){
         $this->load->view('example',$output);	
     }
     
-    public function Publications(){
+    public function TTL_Publications(){
+        $crud = new grocery_CRUD();
+        $crud->set_table('Publication');
+        $crud->columns('idPublication','Title','Year','DOI','Conference_idConference','Journal_idJournal');
+        $crud->set_relation('Conference_idConference', 'Conference','FullName');
+        $crud->set_relation('Journal_idJournal', 'Journal','FullName');
+        $crud->display_as('Year','Año')
+                 ->display_as('Title','Titulo')
+                 ->display_as('Journal_idJournal','Journal')
+                 ->display_as('Conference_idConference','Conferencia');
+        $crud->set_subject('Publication');
+        $output = $crud->render();
+        $this->output($output);
     }
-    public function Organization(){
+    public function TTL_Organization(){
+         $crud = new grocery_CRUD();
+        $crud->set_table('Organization');
+        $crud->columns('idOrganization','Name');
+        $crud->display_as('Name','Nombre');
+        $crud->set_subject('Centro de investigacion');
+        $output = $crud->render();
+        $this->output($output);
     }
-    public function Journal(){
+    public function TTL_Journal(){
+         $crud = new grocery_CRUD();
+        $crud->set_table('Journal');
+        $crud->columns('idJournal','FullName','ShortName');
+        $crud->display_as('FullName','Nombre Completo')
+        ->display_as('ShortName','Nombre Corto');
+        $crud->set_subject('Journals');
+        $output = $crud->render();
+        $this->output($output);
     }
-    public function Conference(){
+    public function TTL_Conference(){
+        $crud = new grocery_CRUD();
+        $crud->set_theme('datatables');
+        $crud->set_table('Conference');
+        //$crud->where('id !=', 1);
+        $crud->columns('idConference','FullName','ShortName');
+        $crud->display_as('FullName','Nombre Completo')
+        ->display_as('ShortName','Nombre Corto');
+        $crud->set_subject('Conferencias');
+        $crud->unset_delete();
+        //$crud->add_action('Eliminar', '', '','ui-icon-circle-minus',array($this,'just_a_test'));
+        //$crud->callback_before_update(array($this,'log_user_before_delete'));
+        $output = $crud->render();
+        $this->output($output);
     }
-    public function Domain(){
+    function just_a_test($primary_key , $row){
+        
+        return true;
     }
+ 
+    
     
 }
 ?>
