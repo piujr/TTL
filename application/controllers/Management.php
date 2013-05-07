@@ -14,7 +14,8 @@ class Management extends CI_Controller {
             $this->load->library('grocery_CRUD');
      }
      public function index(){
-         
+         echo "asd";
+         $this->load->view('Admon',array());	
      }
     public function TTL_Keys(){
         $crud = new grocery_CRUD();
