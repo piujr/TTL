@@ -13,8 +13,7 @@ class Management extends CI_Controller {
             $this->load->helper('url'); 
             $this->load->library('grocery_CRUD');
      }
-     public function index(){
-         echo "asd";
+     public function index(){         
          $this->load->view('Admon',array());	
      }
     public function TTL_Keys(){
