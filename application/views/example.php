@@ -37,15 +37,7 @@ a:hover
             <a href='<?php echo site_url('Management/TTL_Journal')?>'>Journal</a> |
             <a href='<?php echo site_url('Management/TTL_Conference')?>'>Conference</a> 
             
-            <?
-           $metodos=(get_class_methods("Management"));
-           foreach ($metodos as $m ):               
-               $pos= strpos($m, 'TTL') ;
-               if ($pos !== FALSE){                   
-                    ?>
-                    <a href='<?php echo site_url('Management/'. $m)?>'><?=substr($m, 4)?></a> |
-                <?}
-          endforeach;?>		
+           	
 	</div>
 	<div style='height:20px;'></div>  
     <div>
