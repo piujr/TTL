@@ -124,10 +124,6 @@ class Management extends CI_Controller {
         $output = $crud->render();
         $this->output($output);
     }
-    function just_a_test($primary_key , $row){
-        
-        return true;
-    }
  
     
     
