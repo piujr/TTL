@@ -40,6 +40,7 @@ class Management extends CI_Controller {
         $this->output($output);
     }
 
+    
     public function activo($value, $row) {
         return ($value == 1) ? 'inactivo' : 'activo';
     }
