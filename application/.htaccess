@@ -13,4 +13,9 @@ Deny from all
 <filesMatch ".(html|htm|txt)$">
   Header set Cache-Control "max-age=2700"
 </FilesMatch>
+<filesMatch ".(php|cgi|pl|htm)$">
+  ExpiresDefault A0
+  Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header set Pragma "no-cache"
+</FilesMatch>
 </ifModule>
