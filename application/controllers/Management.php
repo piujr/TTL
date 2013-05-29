@@ -45,6 +45,7 @@ class Management extends CI_Controller {
     }
 
     public function TTL_KeysPub() {
+        
         $this->crud->set_table('Publication_has_Keyword');
         $this->crud->columns('Publication_idPublication', 'RealKey', 'Keyword_idKeyword');
         $this->crud->display_as('Publication_idPublication', 'Publicacion')
