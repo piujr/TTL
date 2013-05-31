@@ -18,7 +18,7 @@ class Management extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
         $this->crud = new grocery_CRUD();
-        $this->crud->set_theme('datatables');
+        $this->crud->set_theme('flexigrid');
         $this->crud->unset_delete();
     }
 
@@ -35,7 +35,7 @@ class Management extends CI_Controller {
         $this->crud->set_subject('Keywors');
         $this->crud->callback_column('baja', array($this, 'activo'));
 
-        $this->crud->add_action('Enable', '', 'Management/Extras/Keyword','ui-icon-plus');
+        $this->crud->add_action('Enable', '', 'Management/Extras/Keyword','enabled-icon');
         $output = $this->crud->render();
         $this->output($output);
     }
@@ -106,7 +106,7 @@ class Management extends CI_Controller {
                 ->display_as('Conference_idConference', 'Conferencia')
                 ->display_as('IdBaja', 'Activo');
         
-        $this->crud->add_action('Enable', '', 'Management/IdBaja/Publication','ui-icon-plus');
+        $this->crud->add_action('Enable', '', 'Management/IdBaja/Publication','enabled-icon');
         $this->crud->set_subject('Publication');
 
         $output = $this->crud->render();
@@ -119,10 +119,10 @@ class Management extends CI_Controller {
         $this->crud->columns('idOrganization', 'Name','IdBaja');
         $this->crud->display_as('Name', 'Nombre')
                 ->display_as('IdBaja','Activo');
-        $this->crud->set_relation('IdBaja', 'Baja', 'Nombre');
+        $this->crud->set_relation('IdBaja', 'baja', 'Nombre');
         $this->crud->set_subject('Centro de investigacion');
         $this->crud->where('idOrganization >', 0);
-        $this->crud->add_action('Enable', '', 'Management/IdBaja/Organization','ui-icon-plus');
+        $this->crud->add_action('Enable', '', 'Management/IdBaja/Organization','enabled-icon');
         $output = $this->crud->render();
         $this->output($output);
     }
@@ -137,7 +137,7 @@ class Management extends CI_Controller {
         $this->crud->set_subject('Journals');
         $this->crud->set_relation('IdBaja', 'Baja', 'Nombre');
         $this->crud->where('idJournal >', 0);
-        $this->crud->add_action('Enable', '', 'Management/IdBaja/Journal','ui-icon-plus');
+        $this->crud->add_action('Enable', '', 'Management/IdBaja/Journal','enabled-icon');
         $output = $this->crud->render();
         $this->output($output);
     }
@@ -153,7 +153,7 @@ class Management extends CI_Controller {
                 ->display_as('ShortName', 'Nombre Corto');
         $this->crud->set_subject('Conferencias');
         $this->crud->set_relation('IdBaja', 'Baja', 'Nombre');        
-        $this->crud->add_action('Enable', '', 'Management/IdBaja/Conference','ui-icon-plus');
+        $this->crud->add_action('Enable', '', 'Management/IdBaja/Conference','enabled-icon');
         $this->crud->where('idConference >', 0);
         $output = $this->crud->render();
         $this->output($output);
