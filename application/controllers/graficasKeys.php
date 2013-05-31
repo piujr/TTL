@@ -10,7 +10,8 @@ class graficasKeys extends CI_Controller {
         $query= $this->db->query("Select Name, idKeyword from Keyword 
             INNER JOIN Publication_has_Keyword ON
             (Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword) 
-            WHERE Keyword.baja= 0
+            WHERE 
+            Keyword.baja= 0
             GROUP BY Name, idKeyword 
                 ");            
         $rows=$query->result();
@@ -38,6 +39,7 @@ class graficasKeys extends CI_Controller {
                 INNER JOIN Keyword
                 ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                 WHERE
+                    Publication.IdBaja = 0 AND
                 Author.Extras = 0
                 AND Keyword.baja = 0 
                 AND Keyword.idKeyword in ($in)
@@ -66,6 +68,7 @@ class graficasKeys extends CI_Controller {
                      INNER JOIN Keyword
                      ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                      WHERE
+                        Publication.IdBaja = 0 AND                                
                      Author.Extras = 0 and Keyword.idKeyword in (%s)
                      and IDAuthor not in (%s)
                      GROUP BY

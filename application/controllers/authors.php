@@ -298,6 +298,7 @@ class Authors extends CI_Controller {
            INNER JOIN Keyword
            ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
            WHERE
+            Publication.IdBaja = 0 AND
              Author.Extras = 0
              AND Author.IDAuthor = %d
              AND Keyword.baja = 0 

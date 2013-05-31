@@ -26,6 +26,7 @@ class Graph extends CI_Controller {
                                 INNER JOIN Keyword
                                 ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                                 WHERE
+                                    Publication.IdBaja = 0 AND                                    
                                 Author.Extras = 0
                                 AND Keyword.baja = 0 
                                 GROUP BY
@@ -61,6 +62,8 @@ class Graph extends CI_Controller {
                             INNER JOIN Keyword
                             ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                             WHERE
+                                Publication.IdBaja = 0 AND
+                                Keyword.baja =0 AND
                             Author.Extras = 0 and Keyword.idKeyword in (%s)
                             and IDAuthor not in (%s)
                             GROUP BY
@@ -114,6 +117,8 @@ class Graph extends CI_Controller {
             INNER JOIN Keyword
             ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
             WHERE
+                Publication.IdBaja = 0 AND
+                Keyword.baja =0 AND
             Author.Extras = 0 
             and Author.IDAuthor = %d
             GROUP BY
@@ -149,6 +154,8 @@ class Graph extends CI_Controller {
                             INNER JOIN Keyword
                             ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                             WHERE
+                                Publication.IdBaja = 0 AND
+                                Keyword.baja =0 AND
                             Author.Extras = 0 and Keyword.idKeyword in (%s)
                             and IDAuthor not in (%s)
                             GROUP BY
