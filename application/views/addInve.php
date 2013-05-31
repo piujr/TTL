@@ -1,6 +1,6 @@
 
 <a class="add" href='<?php echo site_url('authors/add')?>'>Agregar Investigadores</a> |             
-<a class="add" href='<?php echo site_url('Management/TTL_Keys')?>'>Keywords</a> |             
+<a class="add" href='<?php echo site_url('Management/TTL_Keyword')?>'>Keywords</a> |             
 <a href='<?php echo site_url('Management/TTL_KeysPub')?>'>Publicaciones y sus Keywords</a> |
 <a href='<?php echo site_url('Management/TTL_authorPublication')?>'>Autores y publicaciones</a> |
 <a href='<?php echo site_url('Management/TTL_Publications')?>'>Publicaciones</a> |

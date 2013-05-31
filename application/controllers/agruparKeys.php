@@ -7,7 +7,7 @@ class AgruparKeys extends CI_Controller {
      
     function index(){
                 
-        $this->db->where('baja' , 0);                 
+        $this->db->where('IdBaja' , 1);
         $query = $this->db->get('Keyword'); 
         $rows=$query->result();
         $i=0;

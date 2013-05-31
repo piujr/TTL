@@ -265,7 +265,7 @@ class Authors extends CI_Controller {
     function searchAuthor(){
         $nombreA = $this->input->get('term');        
         $this->db->select("IDAuthor as id, CONCAT(FirstName,' ', IF (MiddleName IS NULL ,'',MiddleName),' ', IF (LastName IS NULL, '', LastName) ) as value",false);
-        $this->db->where('Extras' , 0); 
+        $this->db->where('IdBaja' , 1); 
         $this->db->like("CONCAT_WS(',',Author.FirstName,' ', MiddleName,' ',LastName )",$nombreA,'both');
         $this->db->or_like("NativeName",$nombreA);         
         $this->db->limit(10);
@@ -298,10 +298,10 @@ class Authors extends CI_Controller {
            INNER JOIN Keyword
            ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
            WHERE
-            Publication.IdBaja = 0 AND
-             Author.Extras = 0
+            Publication.IdBaja = 1 AND
+             Author.IdBaja = 1
              AND Author.IDAuthor = %d
-             AND Keyword.baja = 0 
+             AND Keyword.IdBaja = 1
            GROUP BY
               Keyword.idKeyword,Author.IDAuthor
            order by

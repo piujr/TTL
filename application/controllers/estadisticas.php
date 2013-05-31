@@ -73,7 +73,7 @@ class Estadisticas extends CI_Controller {
             INNER JOIN Publication ON Publication.idPublication = Author_has_Publication.Publication_idPublication
             INNER JOIN Conference ON Conference.idConference = Publication.Conference_idConference
             INNER JOIN Journal ON Journal.idJournal = Publication.Journal_idJournal
-            Where Author.Extras =0 
+            Where Author.IdBaja  =0 
             GROUP BY idOrganization
             ORDER BY idOrganization                              ");
         */
@@ -95,11 +95,11 @@ FROM
   INNER JOIN Conference ON (Conference.idConference = Publication.Conference_idConference)
   INNER JOIN Journal ON (Journal.idJournal = Publication.Journal_idJournal)
 WHERE
-    Publication.IdBaja = 0 AND
-    Organization.IdBaja = 0 AND
-    Conference.IdBaja = 0 AND
-    Journal.IdBaja = 0 AND
-  Author.Extras = 0 
+    Publication.IdBaja = 1 AND
+    Organization.IdBaja = 1 AND
+    Conference.IdBaja = 1 AND
+    Journal.IdBaja = 1 AND
+  Author.IdBaja = 1 
 GROUP BY 
   Organization.idOrganization
 ORDER BY
@@ -163,9 +163,9 @@ ORDER BY
                     INNER JOIN Publication ON Publication.idPublication = Author_has_Publication.Publication_idPublication
                     INNER JOIN Conference ON Conference.idConference = Publication.Conference_idConference                    
                 Where 
-                    Publication.IdBaja = 0 AND
-                    Conference.IdBaja = 0 AND
-                Author.Extras =0 and 
+                    Publication.IdBaja = 1 AND
+                    Conference.IdBaja = 1 AND
+                Author.IdBaja  =1 and 
                 Publication.Conference_idConference >0
                 GROUP BY idConference
                 HAVING autores > 2
@@ -212,9 +212,9 @@ FROM
   INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
   INNER JOIN Journal ON (Journal.idJournal = Publication.Journal_idJournal)
 WHERE
-        Publication.IdBaja = 0 AND
-        Journal.IdBaja = 0 AND
-  Author.Extras = 0 AND 
+        Publication.IdBaja = 1 AND
+        Journal.IdBaja = 1 AND
+  Author.IdBaja  = 1 AND 
   Publication.Journal_idJournal > 0
 GROUP BY
   Journal.FullName,
@@ -281,10 +281,10 @@ ORDER BY
                     INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                     INNER JOIN Journal ON (Journal.idJournal = Publication.Journal_idJournal)
                   WHERE
-                    Publication.IdBaja = 0 AND
-                    Journal.IdBaja = 0 AND
-                    Organization.IdBaja = 0 AND
-                  Author.Extras=0 and
+                    Publication.IdBaja = 1 AND
+                    Journal.IdBaja = 1 AND
+                    Organization.IdBaja = 1 AND
+                  Author.IdBaja =1 and
                     Organization.idOrganization = %d AND 
                     Publication.Journal_idJournal > 0
                   GROUP BY
@@ -306,10 +306,10 @@ ORDER BY
                     INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                     INNER JOIN Conference ON (Publication.Conference_idConference = Conference.idConference)
                   WHERE
-                      Publication.IdBaja = 0 AND
-                      Conference.IdBaja = 0 AND
-                      Organization.IdBaja = 0 AND
-                    Author.Extras = 0 AND 
+                      Publication.IdBaja = 1 AND
+                      Conference.IdBaja = 1 AND
+                      Organization.IdBaja = 1 AND
+                    Author.IdBaja  = 1 AND 
                     Organization.idOrganization = %d AND 
                     Publication.Conference_idConference > 0
                   GROUP BY
@@ -332,10 +332,10 @@ ORDER BY
                     INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                     INNER JOIN Conference ON (Publication.Conference_idConference = Conference.idConference)
                   WHERE
-                      Publication.IdBaja = 0 AND
-                      Conference.IdBaja = 0 AND
-                      Organization.IdBaja = 0 AND
-                    Author.Extras = 0 AND 
+                      Publication.IdBaja = 1 AND
+                      Conference.IdBaja = 1 AND
+                      Organization.IdBaja = 1 AND
+                    Author.IdBaja  = 1 AND 
                     Organization.idOrganization = %d AND 
                       Publication.Conference_idConference = 0  and Publication.`Journal_idJournal` = 0
                   GROUP BY
@@ -403,9 +403,9 @@ ORDER BY
                             INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                             INNER JOIN Conference ON (Conference.idConference = Publication.Conference_idConference)
                           WHERE
-                                Publication.IdBaja = 0 AND
-                                Conference.IdBaja = 0 AND
-                            Author.Extras = 0 AND 
+                                Publication.IdBaja = 1 AND
+                                Conference.IdBaja = 1 AND
+                            Author.IdBaja  = 1 AND 
                             Publication.Conference_idConference > 0 AND 
                             Conference.idConference = %d
                           GROUP BY                                                       
@@ -423,9 +423,9 @@ ORDER BY
                                 INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                                 INNER JOIN Conference ON (Conference.idConference = Publication.Conference_idConference)
                               WHERE
-                                    Publication.IdBaja = 0 AND
-                                    Conference.IdBaja = 0 AND                                    
-                                Author.Extras = 0 AND 
+                                    Publication.IdBaja = 1 AND
+                                    Conference.IdBaja = 1 AND                                    
+                                Author.IdBaja  = 1 AND 
                                 Publication.Conference_idConference > 0 AND 
                                 Conference.idConference = %d
                               GROUP BY
@@ -450,9 +450,9 @@ ORDER BY
                             INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                             INNER JOIN Journal ON (Journal.idJournal = Publication.Journal_idJournal)
                           WHERE
-                                Publication.IdBaja = 0 AND
-                                Journal.IdBaja = 0 AND
-                            Author.Extras = 0 AND 
+                                Publication.IdBaja = 1 AND
+                                Journal.IdBaja = 1 AND
+                            Author.IdBaja  = 1 AND 
                             Journal.idJournal = %d
                           GROUP BY
 
@@ -469,9 +469,9 @@ ORDER BY
                                 INNER JOIN Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
                                 INNER JOIN Journal ON (Journal.idJournal= Publication.Journal_idJournal)
                               WHERE
-                                    Publication.IdBaja = 0 AND
-                                    Journal.IdBaja = 0 AND
-                                Author.Extras = 0 AND                                 
+                                    Publication.IdBaja = 1 AND
+                                    Journal.IdBaja = 1 AND
+                                Author.IdBaja  = 1 AND                                 
                                 Journal.idJournal = %d
                                GROUP by
                                     Author.`IDAuthor`
@@ -530,10 +530,10 @@ ORDER BY
             INNER JOIN Author_has_Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
             INNER JOIN Author ON (Author_has_Publication.Author_IDAuthor = Author.IDAuthor)
           WHERE
-                Publication.IdBaja = 0 AND
-                Journal.IdBaja = 0 AND
-            Author.Extras = 0 AND 
-            Keyword.baja = 0            
+                Publication.IdBaja = 1 AND
+                Journal.IdBaja = 1 AND
+            Author.IdBaja  = 1 AND 
+            Keyword.IdBaja = 1            
           GROUP BY
             Keyword.Name
           

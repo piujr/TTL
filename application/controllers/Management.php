@@ -26,16 +26,15 @@ class Management extends CI_Controller {
         $this->load->view('Admon', array());
     }
 
-    public function TTL_Keys() {
+    public function TTL_Keyword() {
 
         $this->crud->set_table('Keyword');
-        $this->crud->columns('Name', 'baja');
+        $this->crud->columns('Name', 'IdBaja');
         $this->crud->display_as('Name', 'Nombre')
-                ->display_as('baja', 'Baja');
+                ->display_as('IdBaja', 'IsActive');
         $this->crud->set_subject('Keywors');
-        $this->crud->callback_column('baja', array($this, 'activo'));
-
-        $this->crud->add_action('Activo / Inactivo ', '', 'Management/Extras/Keyword','enabled-icon');
+        $this->crud->callback_column('IdBaja', array($this, 'activo'));
+        $this->crud->add_action('Activo / Inactivo ', '', 'Management/IdBaja/Keyword','enabled-icon');        
         $output = $this->crud->render();
         $this->output($output);
     }
@@ -81,9 +80,10 @@ class Management extends CI_Controller {
         $this->crud->set_relation_n_n('Publicaciones', 'Author_has_Publication', 'Publication', 'Author_IDAuthor', 'Publication_idPublication', 'Title');
         $this->crud->set_relation('Organization_idOrganization', 'Organization', 'Name');
         $this->crud->unset_columns('DOI', 'URL', 'YEAR', 'PublicationCount', 'CitationCount', 'citationCount', 'HIndex', 'GIndex', 'DisplayPhotoURL');
-        $this->crud->fields('FirstName', 'LastName', 'MiddleName', 'NativeName', 'Extras', 'DisplayPhotoURL', 'Publicaciones', 'Organization_idOrganization');
-        $this->crud->display_as('Extras', 'Desactivado');
-        $this->crud->callback_column('Extras', array($this, 'activo'));
+        $this->crud->set_relation('IdBaja', 'Baja', '{Nombre}');
+        $this->crud->fields('FirstName', 'LastName', 'MiddleName', 'NativeName', 'IdBaja', 'DisplayPhotoURL', 'Organization_idOrganization','Publicaciones');
+        $this->crud->display_as('IdBaja', 'Activado');
+        //$this->crud->callback_column('IdBaja', array($this, 'activo'));
         $this->crud->where('Author.IDAuthor >', 0);        
         $output = $this->crud->render();
         $this->output($output);
@@ -119,7 +119,7 @@ class Management extends CI_Controller {
         $this->crud->columns('idOrganization', 'Name','IdBaja');
         $this->crud->display_as('Name', 'Nombre')
                 ->display_as('IdBaja','Activo');
-        $this->crud->set_relation('IdBaja', 'baja', 'Nombre');
+        $this->crud->set_relation('IdBaja', 'Baja', 'Nombre');
         $this->crud->set_subject('Centro de investigacion');
         $this->crud->where('idOrganization >', 0);
         $this->crud->add_action('Activo / Inactivo ', '', 'Management/IdBaja/Organization','enabled-icon');
@@ -143,8 +143,7 @@ class Management extends CI_Controller {
     }
 
     public function TTL_Conference() {
-
-        $this->crud->set_theme('datatables');
+        
         $this->crud->set_table('Conference');
         //$this->crud->where('id !=', 1);
         $this->crud->columns('idConference', 'FullName', 'ShortName','IdBaja');
@@ -164,7 +163,7 @@ class Management extends CI_Controller {
         $res=$query->result();
         $res=$res[0];
         print_r($res);
-        $data= array("IdBaja" => ($res->IdBaja ==1) ? 0: 1);
+        $data= array("IdBaja" => ($res->IdBaja ==1) ? 2: 1);
         $this->db->where('id'.$ruta, $id);
         echo $this->db->update($ruta, $data); 
         
@@ -176,7 +175,7 @@ class Management extends CI_Controller {
         $res=$query->result();
         $res=$res[0];
         //print_r($res);
-        $data= array("baja" => ($res->baja ==1) ? 0: 1);
+        $data= array("IdBaja" => ($res->IdBaja ==1) ? 2: 1);
         $this->db->where('id'.$ruta, $id);
         //echo $this->db->update($ruta, $data); 
         

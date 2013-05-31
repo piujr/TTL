@@ -26,9 +26,9 @@ class Graph extends CI_Controller {
                                 INNER JOIN Keyword
                                 ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                                 WHERE
-                                    Publication.IdBaja = 0 AND                                    
-                                Author.Extras = 0
-                                AND Keyword.baja = 0 
+                                    Publication.IdBaja = 1 AND                                    
+                                Author.IdBaja = 1 AND
+                                Keyword.IdBaja = 1
                                 GROUP BY
                                   IDAuthor
                                 order by
@@ -62,9 +62,9 @@ class Graph extends CI_Controller {
                             INNER JOIN Keyword
                             ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                             WHERE
-                                Publication.IdBaja = 0 AND
-                                Keyword.baja =0 AND
-                            Author.Extras = 0 and Keyword.idKeyword in (%s)
+                                Publication.IdBaja = 1 AND
+                                Keyword.IdBaja =1 AND
+                            Author.IdBaja = 1 and Keyword.idKeyword in (%s)
                             and IDAuthor not in (%s)
                             GROUP BY
                               IDAuthor
@@ -117,9 +117,9 @@ class Graph extends CI_Controller {
             INNER JOIN Keyword
             ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
             WHERE
-                Publication.IdBaja = 0 AND
-                Keyword.baja =0 AND
-            Author.Extras = 0 
+                Publication.IdBaja = 1 AND
+                Keyword.IdBaja =1 AND
+            Author.IdBaja= 1
             and Author.IDAuthor = %d
             GROUP BY
               IDAuthor
@@ -154,9 +154,9 @@ class Graph extends CI_Controller {
                             INNER JOIN Keyword
                             ON Publication_has_Keyword.Keyword_idKeyword = Keyword.idKeyword
                             WHERE
-                                Publication.IdBaja = 0 AND
-                                Keyword.baja =0 AND
-                            Author.Extras = 0 and Keyword.idKeyword in (%s)
+                                Publication.IdBaja = 1 AND
+                                Keyword.IdBaja =1 AND
+                            Author.IdBaja= 1 and Keyword.idKeyword in (%s)
                             and IDAuthor not in (%s)
                             GROUP BY
                               IDAuthor
