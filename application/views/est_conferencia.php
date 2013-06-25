@@ -32,34 +32,28 @@
           success: function (jsonData1) {
                 jsonData = jsonData1.data;
                 var data = new google.visualization.DataTable(jsonData);
-                Orden = jsonData1.orden;
-               //alert(Orden.id[1]);
+                Orden = jsonData1.orden;               
                 var options = {
+                
+                textStyle: {color: '#CCCC'}, 
+                showColorCode: true,
+                legend: {textStyle: {fontSize: 14}},
+                
                 title: jsonData1.title,
                 vAxis: {title: 'Organizacion',  titleTextStyle: {color: 'red'}},
                 width: 1000, height: 1000,
                  is3D: false,                
-                 fontSize: 10,
+                 fontSize: 9,             
+                legend:{position: 'top', textStyle: {color: 'blue', fontSize: 16}},
+                 chartArea: {left:250, width: 700},
                 isStacked: true
               };
 
                 // Instantiate and draw our chart, passing in some options.
                 //ColumnChart
                 var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-                
-                
-                
-                 function selectHandler() {
-                    /*var selectedItem = chart.getSelection()[0];
-                    if (selectedItem) {
-                      var topping = data.getValue(selectedItem.row, 3);
-                      var topping2  = data.getValue(selectedItem.row, 2);
-                     alert(e);
-                      alert('The user selected ' + topping + topping2);
-                    }*/ 
-                        
+                 function selectHandler() {                    
                            var selection = chart.getSelection();
-                           
                            var row, column;
                            for (var i = 0; i < selection.length; i++) {
                                 var item = selection[i];
@@ -87,11 +81,7 @@
 
    
     } 
-    function barMouseOver(e) {           
-            alert(chart.getSelection());
-          }
-       
-
+   
     </script>
  
 </head>

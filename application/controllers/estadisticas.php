@@ -60,23 +60,7 @@ class Estadisticas extends CI_Controller {
          endforeach;
          return $acronimo;
     }    
-    function orgXinstituto(){
-        /*  $query= $this->db->query("  SELECT
-            Organization.`Name`,
-            COUNT(DISTINCT if (idConference > 0,idConference,NULL) ) as  conferencias,
-            COUNT(DISTINCT if (idJournal > 0,idJournal,NULL) ) as journals,
-            COUNT(DISTINCT if (idJournal = 0 AND idConference = 0,idJournal,NULL) ) as Otro
-            FROM
-            Organization
-            INNER JOIN Author ON Organization.idOrganization = Author.Organization_idOrganization
-            INNER JOIN Author_has_Publication ON Author.IDAuthor = Author_has_Publication.Author_IDAuthor
-            INNER JOIN Publication ON Publication.idPublication = Author_has_Publication.Publication_idPublication
-            INNER JOIN Conference ON Conference.idConference = Publication.Conference_idConference
-            INNER JOIN Journal ON Journal.idJournal = Publication.Journal_idJournal
-            Where Author.IdBaja  =0 
-            GROUP BY idOrganization
-            ORDER BY idOrganization                              ");
-        */
+    function orgXinstituto(){        
         
      $query= $this->db->query("SELECT DISTINCT 
   Author.IDAuthor,
@@ -105,9 +89,7 @@ GROUP BY
 ORDER BY
   Organization.name
         ");
-        //$data['query']=$this->db->get('Author');
-        //print_r($data['query']->result());
-        
+       
          $resultados=$query->result();
          $json['cols'][0]['id']="";
          $json['cols'][0]['label']="Intituto";
@@ -122,14 +104,11 @@ ORDER BY
          $json['cols'][3]['label']="Otro";
          $json['cols'][3]['type']="number";
          
-       //  $json['cols'][4]['label']="";
-        // $json['cols'][4]['type']="string";        
-         //$json['cols'][4]['p']['role']="tooltip";
          $cont=0;
          foreach($resultados as $r): 
              $orden['id'][$cont]=$r->idOrganization;
              //$instituto =$this->creaAcronimo(ucwords(htmlentities($r->Name, ENT_QUOTES,'UTF-8')));
-             $instituto =ucwords(htmlentities($r->Name, ENT_QUOTES,'UTF-8'));
+             $instituto =ucwords($r->Name);
             if (strlen(trim($instituto)) == 0 )
                 $instituto ="Otro";
             $json['rows'][$cont]['c'][0]['v']=$instituto ;
@@ -530,8 +509,7 @@ ORDER BY
             INNER JOIN Author_has_Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
             INNER JOIN Author ON (Author_has_Publication.Author_IDAuthor = Author.IDAuthor)
           WHERE
-                Publication.IdBaja = 1 AND
-                Journal.IdBaja = 1 AND
+                Publication.IdBaja = 1 AND                
             Author.IdBaja  = 1 AND 
             Keyword.IdBaja = 1            
           GROUP BY

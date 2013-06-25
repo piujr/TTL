@@ -33,6 +33,7 @@ class Management extends CI_Controller {
         $this->crud->display_as('Name', 'Nombre')
                 ->display_as('IdBaja', 'IsActive');
         $this->crud->set_subject('Keywors');
+        $this->crud->set_relation('IdBaja', 'Baja', '{Nombre}');
         $this->crud->callback_column('IdBaja', array($this, 'activo'));
         $this->crud->add_action('Activo / Inactivo ', '', 'Management/IdBaja/Keyword','enabled-icon');        
         $output = $this->crud->render();
@@ -161,12 +162,10 @@ class Management extends CI_Controller {
     public function IdBaja($ruta,$id) {
         $query = $this->db->get_where($ruta, array('id'.$ruta => $id));               
         $res=$query->result();
-        $res=$res[0];
-        print_r($res);
+        $res=$res[0];        
         $data= array("IdBaja" => ($res->IdBaja ==1) ? 2: 1);
-        $this->db->where('id'.$ruta, $id);
-        echo $this->db->update($ruta, $data); 
-        
+        $this->db->where('id'.$ruta, $id);        
+        $this->db->update($ruta, $data);         
         redirect('Management/TTL_'.$ruta, 'refresh');        
         return true;
     }
