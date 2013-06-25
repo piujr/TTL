@@ -30,17 +30,17 @@ class Management extends CI_Controller {
         $this->crud->set_table('Keyword');
         $this->crud->columns('Name', 'IdBaja');
         $this->crud->display_as('Name', 'Nombre')
-                ->display_as('IdBaja', 'IsActive');
+                ->display_as('IdBaja', 'Activo');
         $this->crud->set_subject('Keywors');
         $this->crud->set_relation('IdBaja', 'Baja', '{Nombre}');
-        $this->crud->callback_column('IdBaja', array($this, 'activo'));
+        //$this->crud->callback_column('IdBaja', array($this, 'activo'));
         $this->crud->add_action('Activo / Inactivo ', '', 'Management/IdBaja/Keyword','enabled-icon');        
         $output = $this->crud->render();
         $this->output($output);
     }
 
     public function activo($value, $row) {
-        return ($value == 1) ? 'inactivo' : 'activo';
+        return ($value == 1) ? 'inactivossss' : 'activo22222222222s';
     }
 
     public function TTL_KeysPub() {
