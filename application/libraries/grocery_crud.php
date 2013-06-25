@@ -1496,7 +1496,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		
 		// Convert to UTF-16LE and Prepend BOM
 		$string_to_export = "\xFF\xFE" .mb_convert_encoding($string_to_export, 'UTF-16LE', 'UTF-8');
-		
+		date_default_timezone_set("Mexico/General");
 		$filename = "export-".date("Y-m-d_H:i:s").".xls";
 		
 		header('Content-type: application/vnd.ms-excel;charset=UTF-16LE');

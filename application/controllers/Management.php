@@ -24,6 +24,8 @@ class Management extends CI_Controller {
 
     public function index() {
         $this->load->view('Admon', array());
+        
+        date_default_timezone_set('America/Los_Angeles');
     }
 
     public function TTL_Keyword() {
