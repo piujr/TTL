@@ -27,7 +27,6 @@ class Management extends CI_Controller {
     }
 
     public function TTL_Keyword() {
-
         $this->crud->set_table('Keyword');
         $this->crud->columns('Name', 'IdBaja');
         $this->crud->display_as('Name', 'Nombre')
