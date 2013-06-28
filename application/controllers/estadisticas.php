@@ -146,8 +146,7 @@ ORDER BY
                     Conference.IdBaja = 1 AND
                 Author.IdBaja  =1 and 
                 Publication.Conference_idConference >0
-                GROUP BY idConference
-                HAVING autores > 2
+                GROUP BY idConference                
                 order by autores                       ");
          $resultados=$query->result();
          $json['cols'][0]['id']="";
@@ -198,8 +197,6 @@ WHERE
 GROUP BY
   Journal.FullName,
   Journal.idJournal
-HAVING
-  autores >2
 ORDER BY
   autores                 ");
         

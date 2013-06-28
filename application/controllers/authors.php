@@ -59,9 +59,13 @@ class Authors extends CI_Controller {
                         "Name" => $afiliacion['Name']
                     );                
                     $return["afiliado"]=$afiliacion["Name"];
-                    if (!$this->debug)
-                        if (!$this->db->insert('Organization', $data))
-                            $return["Error"]["Organization"]=$this->db->_error_message();
+                                        
+                    //$query = $this->db->get_where('Organization', array('idOrganization' => $afiliacion['ID']));                                        
+                    //if ($query->num_rows() == 0){
+                        if (!$this->debug)
+                            if (!$this->db->insert('Organization', $data))
+                                $return["Error"]["Organization"]=$this->db->_error_message();
+                    //}
                 }else
                     $return["afiliado"]="No tiene afiliacion";                
                      
@@ -264,13 +268,19 @@ class Authors extends CI_Controller {
         }
     function searchAuthor(){
         $nombreA = $this->input->get('term');        
-        $this->db->select("IDAuthor as id, CONCAT(FirstName,' ', IF (MiddleName IS NULL ,'',MiddleName),' ', IF (LastName IS NULL, '', LastName) ) as value",false);
-        $this->db->where('IdBaja' , 1); 
-        $this->db->like("CONCAT_WS(',',Author.FirstName,' ', MiddleName,' ',LastName )",$nombreA,'both');
-        $this->db->or_like("NativeName",$nombreA);         
-        $this->db->limit(10);
-        $query = $this->db->get('Author'); 
-        $rows=$query->result();
+        
+        
+        $query = $this->db->query("Select IDAuthor as id, CONCAT(FirstName,' ', IF (MiddleName IS NULL ,'',MiddleName),' ', IF (LastName IS NULL, '', LastName) ) as value
+                from Author where 
+                IdBaja =1 
+                and (
+                CONCAT_WS(',',Author.FirstName,' ', MiddleName,' ',LastName ) like '%$nombreA%' or 
+                    NativeName like '%$nombreA%' 
+                     )
+                limit 10
+                ");
+        
+        $rows=$query->result();        
         echo json_encode($rows);
         
         //$this->load->view('searchAuthor');
