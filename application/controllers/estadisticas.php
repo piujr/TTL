@@ -41,12 +41,12 @@ class Estadisticas extends CI_Controller {
             case 2: 
                 $data['destino']='publicXconf';
                 $data['destinoDetalle']='showPublicAuthors';
-                $data['titulo']="Publicaciones por institución en congresos";
+                $data['titulo']="Publicaciones por congreso";
                 break;
             case 3: 
                 $data['destino']='publicXjournal';
                 $data['destinoDetalle']='showPublicAuthors';
-                $data['titulo']="Publicaciones por institución en revistas";
+                $data['titulo']="Publicaciones por revista";
                 break;            
         }        
         $data['mainContent']='est_conferencia';

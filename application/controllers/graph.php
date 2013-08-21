@@ -68,9 +68,10 @@ class Graph extends CI_Controller {
                             and IDAuthor not in (%s)
                             GROUP BY
                               IDAuthor
-                            HAVING totalKeys > 3
                             order by
                                 totalKeys  DESC",  $llaves,implode(", ",$idAuthorString));
+//HAVING totalKeys > 3
+
         //echo $queryString."\n";
             $query2=$this->db->query($queryString);
             $json[$contador]['id']=$v->IDAuthor;
@@ -160,10 +161,8 @@ class Graph extends CI_Controller {
                             and IDAuthor not in (%s)
                             GROUP BY
                               IDAuthor
-                            HAVING totalKeys > 3
                             order by
                                 totalKeys  DESC",  $llaves,implode(", ",$idAuthorString));
-        //echo $queryString."\n";
             $query2=$this->db->query($queryString);
             $json[$contador]['id']=$v->IDAuthor;
             $json[$contador]['name']=$v->FirstName." ".$v->MiddleName." ".$v->LastName;
