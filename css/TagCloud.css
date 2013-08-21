@@ -11,6 +11,19 @@
     border-radius: 8px;
     clear: right;
 }
+#tagcloudFull {
+    width: 950px;
+    background:#CFE3FF;
+    color:#0066FF;
+    padding: 10px;
+    border: 1px solid #559DFF;
+    text-align:center;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    clear: right;
+    
+}
  
 #tagcloud a:link, #tagcloud a:visited,#tagcloud a{
     text-decoration:none;
@@ -24,7 +37,7 @@
 }
  
 #tagcloud span {
-    padding: 4px;
+    padding: 40px;
 }
  
 #tagcloud .smallest {

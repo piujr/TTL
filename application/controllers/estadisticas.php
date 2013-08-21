@@ -535,5 +535,85 @@ ORDER BY
         $data['mainContent']='selectGraph';
          $this->load->view('mainTemplate',$data);
     }
+    
+    function listRelInst(){
+         $queryString="
+          SELECT 
+            Organization.idOrganization,
+            Organization.Name,
+            GROUP_CONCAT(DISTINCT Publication.idPublication) AS publicaciones,
+            GROUP_CONCAT(DISTINCT '\"',Publication.Title,'\"') AS publicacionesN
+          FROM
+            Author
+            INNER JOIN Author_has_Publication ON (Author.IDAuthor = Author_has_Publication.Author_IDAuthor)
+            INNER JOIN Publication ON (Author_has_Publication.Publication_idPublication = Publication.idPublication)
+            INNER JOIN Organization ON (Author.Organization_idOrganization = Organization.idOrganization)
+          WHERE
+            Author.IdBaja = 1 AND 
+            Publication.IdBaja = 1 AND 
+            Organization.IdBaja = 1
+          GROUP BY
+            Organization.idOrganization,
+            Organization.Name";
+         
+         $query= $this->db->query($queryString);
+         $resultados=$query->result();
+         $dat= array(
+             array("Institucion","Instituciones relacionadas","Publicaciones")
+         );
+         foreach ($resultados as $r):             
+             $queryString="
+                SELECT 
+                    GROUP_CONCAT(DISTINCT '\"', Organization.Name, '\"') AS rel
+                  FROM
+                    Author
+                    INNER JOIN Author_has_Publication ON (Author.IDAuthor = Author_has_Publication.Author_IDAuthor)
+                    INNER JOIN Publication ON (Author_has_Publication.Publication_idPublication = Publication.idPublication)
+                    INNER JOIN Organization ON (Author.Organization_idOrganization = Organization.idOrganization)
+                  WHERE
+                    Author.IdBaja = 1 AND 
+                    Publication.IdBaja = 1 AND 
+                    Organization.IdBaja = 1 AND 
+                    Publication.idPublication IN ({$r->publicaciones}) AND 
+                    Organization.idOrganization != {$r->idOrganization}";
+                
+                    $query= $this->db->query($queryString); 
+                $res=$query->result();                
+                $dat[]= array($r->Name,$res[0]->rel,$r->publicacionesN);
+                
+         endforeach;
+        $this->load->library('table');
+        $data['queryTable']= $this->table->generate($dat);
+        $data['title']=$data['titulo']="Palabras claves e investigadores asociados";
+            $data['mainContent']='investigadoresKeys';
+            $this->load->view('mainTemplate',$data);
+        
+    }
+    public function Cloud(){
+        $queryString="SELECT 
+            Keyword.idKeyword,
+            COUNT(Author.IDAuthor) AS Frequencia,
+            Keyword.Name
+          FROM
+            Keyword
+            INNER JOIN Publication_has_Keyword ON (Keyword.idKeyword = Publication_has_Keyword.Keyword_idKeyword)
+            INNER JOIN Publication ON (Publication_has_Keyword.Publication_idPublication = Publication.idPublication)
+            INNER JOIN Author_has_Publication ON (Publication.idPublication = Author_has_Publication.Publication_idPublication)
+            INNER JOIN Author ON (Author_has_Publication.Author_IDAuthor = Author.IDAuthor)
+          WHERE
+            Keyword.IdBaja = 1
+          GROUP BY
+            Keyword.idKeyword,
+            Keyword.Name";     
+         $query= $this->db->query($queryString); 
+         $res=$query->result();
+         
+        $data['totalKeyWords']= count($res);
+        $data['keys']= $res;
+        $data['title']=$data['titulo']="Cloud";
+        $data['mainContent']='cloud';
+        $this->load->view('mainTemplate',$data);
+    }
+    
 }
 ?>
